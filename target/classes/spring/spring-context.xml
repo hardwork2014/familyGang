@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd 
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd 
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd 
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd 
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd"	default-lazy-init="true">
+
+	<!-- 应用属性文件读入 -->
+	<bean id="applicationProperties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+		<property name="ignoreResourceNotFound" value="false" />
+		<property name="locations">
+			<list>
+				<value>classpath:/jdbc.properties</value>
+				<value>classpath:/context.properties</value>
+			</list>
+		</property>
+	</bean>
+
+	<!-- 用于持有applicationProperties,将properties转变为静态方法使用,PropertiesHolder.getProperty("somekey")--> 
+	<bean class="com.jzb.fgang.utils.PropertiesUtils" lazy-init="false">
+		<property name="properties" ref="applicationProperties" />
+	</bean>
+
+	<!-- PropertyPlaceholderConfigurer,用于spring ${placeholder}的解析 -->
+	<bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE" />
+		<property name="properties" ref="applicationProperties" />
+	</bean>
+	
+	<!-- 数据连接事务 -->
+    <bean name="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	<!-- 连接事务的注解配置 -->
+	<tx:annotation-driven transaction-manager="transactionManager" />
+
+	<!-- 事务增强 -->
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="get*" read-only="true" propagation="SUPPORTS" />
+			<tx:method name="find*" read-only="true" propagation="SUPPORTS" />
+			<tx:method name="count*" read-only="true" propagation="SUPPORTS" />
+			<tx:method name="select*" read-only="true" propagation="SUPPORTS" />
+			<tx:method name="fetch*" read-only="true" propagation="SUPPORTS" />
+			<tx:method name="query*" read-only="true" propagation="SUPPORTS" />
+			<tx:method name="is*" read-only="true" propagation="SUPPORTS" />
+			<tx:method name="del*" read-only="false" propagation="REQUIRED" />
+			<tx:method name="update*" read-only="false" propagation="REQUIRED" />
+			<tx:method name="add*" read-only="false" propagation="REQUIRED" /> 
+			<tx:method name="save*" read-only="false" propagation="REQUIRED" />
+			<tx:method name="valid*" read-only="false" propagation="REQUIRED" />
+			<tx:method name="insert*" read-only="false" propagation="REQUIRED" />
+			<tx:method name="start*" read-only="false" propagation="REQUIRED" />
+			<tx:method name="log*" read-only="false" propagation="REQUIRES_NEW" />
+			<tx:method name="*" read-only="false" propagation="SUPPORTS" />
+		</tx:attributes>
+	</tx:advice>
+
+	<aop:config proxy-target-class="true">
+		<aop:pointcut id="serviceOperation"
+			expression="execution(* com.jzb.fgang.*.*Service+.*(..))" />
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="serviceOperation" />
+	</aop:config>
+	
+	<!-- 配置MyBatis映射文件 -->
+     <bean name="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+         <property name="typeAliasesPackage" value="com.jzb.fgang.model"/>
+        <property name="mapperLocations" value="classpath*:mybatis/mappers/*.xml"/>
+        <property name="configurationProperties">
+            <props>
+                <prop key="cacheEnabled">false</prop>
+                <prop key="lazyLoadingEnabled">false</prop>
+            </props>
+        </property>
+        <property name="plugins">
+        	<list>
+        		<bean class="com.jzb.fgang.utils.PagingPlugin">
+        			<property name="dialect" value="mysql"></property>
+        		</bean>
+        	</list>
+        </property>
+    </bean>
+
+	<!-- 扫描com.paic.clearing.mapper下的所有接口，然后创建各自接口的动态代理类 -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.jzb.fgang.mapper"/>
+        <property name="annotationClass" value="org.mybatis.spring.annotation.MapperScan"/>
+    </bean>
+
+	<bean name="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
+			init-method="init" destroy-method="close">
+		<!-- init-method 在这个bean实例化一个对象的时候，执行这个方法里面的内容 -->
+		<property name="url" value="${${env}.jdbc.url}" />
+		<property name="username" value="${${env}.jdbc.user}" />
+		<property name="password" value="${${env}.jdbc.password}" />
+		<property name="driverClassName" value="${${env}.jdbc.driverClass}" />
+		<!--配置初始化大小、最小、最大 -->
+		<property name="initialSize" value="1" />
+		<property name="minIdle" value="1" />
+		<property name="maxActive" value="20" />
+
+		<!--获取连接等待超时时间，单位：毫秒 -->
+		<property name="maxWait" value="30000" />
+
+		<!--间隔多久才进行一次检测，检测需要关闭的空闲连接，单位：毫秒 -->
+		<property name="timeBetweenEvictionRunsMillis" value="60000" />
+
+		<!--配置一个连接在池中最小生存时间，单位：毫秒 -->
+		<property name="minEvictableIdleTimeMillis" value="300000" />
+
+		<property name="validationQuery" value="SELECT 'x' FROM dual" />
+		<property name="testWhileIdle" value="true" />
+		<property name="testOnBorrow" value="false" />
+		<property name="testOnReturn" value="false" />
+
+		<!--打开PSCache，并且指定每个连接上PSCache的大小 -->
+		<!--如果是oracle，配置成true。MySQL配置成false -->
+		<property name="poolPreparedStatements" value="true" />
+		<property name="maxPoolPreparedStatementPerConnectionSize"
+			value="20" />
+
+		<!--配置监控统计拦截的filters -->
+		<property name="filters" value="stat" />
+	</bean>
+</beans>

@@ -1,0 +1,76 @@
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+  xmlns:beans="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+           http://www.springframework.org/schema/security
+           http://www.springframework.org/schema/security/spring-security.xsd"> 
+	
+    <http pattern="/js/**" security="none" />
+	<http pattern="/css/**" security="none" />
+	<http pattern="/**/*.js" security="none"/>
+	<http pattern="/**/*.css" security="none"/>
+	<http pattern="/images/**" security="none" />
+	<http pattern="/image/**" security="none" />
+	<http pattern="/auth/login" security="none" />
+	<http pattern="/favicon.ico" security="none" />
+	<http pattern="/index.jsp" security="none"/>
+	<http pattern="/common/**" security="none"/>
+	<http pattern="/servlet/VerifyCodeServlet" security="none" />
+	
+    <http use-expressions="true" entry-point-ref="authenticationProcessingFilterEntryPoint">
+        <intercept-url pattern="/**" access="hasRole('ROLE_USER')"/>
+        <access-denied-handler error-page="/403.html"/>        
+    	<logout invalidate-session="true" logout-success-url="/" logout-url="/logout"/>
+       	<!-- 单用户登陆 -->
+        <session-management invalid-session-url="/auth/login">
+        	<concurrency-control max-sessions="1" error-if-maximum-exceeded="true" />
+        </session-management>
+        <!-- 自定义UsernamePasswordAuthenticationFilter，校验用户输入和验证码 -->
+	    <custom-filter ref="loginFilter" position="FORM_LOGIN_FILTER" />
+    </http>
+    
+    <!-- 登录验证器 -->  
+  	<beans:bean id="loginFilter"  
+    	class="com.jzb.fgang.auth.MyUsernamePasswordAuthenticationFilter">  
+    	<beans:property name="filterProcessesUrl" value="/j_spring_security_check"></beans:property>
+        <!-- 验证成功后的处理  -->   
+    	<beans:property name="authenticationSuccessHandler" ref="loginAuthenticationSuccessHandler"></beans:property>  
+        <!-- 验证失败后的处理  --> 
+    	<beans:property name="authenticationFailureHandler" ref="loginAuthenticationFailureHandler"></beans:property>  
+    	
+    	<beans:property name="authenticationManager" ref="loginAuthenticationManage"></beans:property>
+    	
+    	<beans:property name="useCaptcha" value="true"></beans:property>
+  	</beans:bean>  
+    
+  	<authentication-manager alias="loginAuthenticationManage">
+  		<authentication-provider ref="loginAuthenticationProvider" />
+  	</authentication-manager> 
+  	
+  	<beans:bean id="loginAuthenticationProvider" class="com.jzb.fgang.auth.LoginAuthenticationProvider">
+  		<beans:property name="userDetailService" ref="dbUserDetailService" />
+  		<beans:property name="passwordEncoder" ref="passwordEncoder" />
+  	</beans:bean>
+  	
+  	<beans:bean id="dbUserDetailService"
+		class="com.jzb.fgang.service.DefaultUserDetailsService" />
+		
+	<!-- 存储的密码的加密方式 -->
+	<beans:bean id="passwordEncoder"
+		class="org.springframework.security.authentication.encoding.Md5PasswordEncoder"/>
+		
+  	<!-- 登陆成功处理 -->
+  	<beans:bean id="loginAuthenticationSuccessHandler" 
+  		class="com.jzb.fgang.auth.DefaultAuthenticationSuccessHandler" />
+  		
+  	<!-- 登陆失败处理 -->
+  	<beans:bean id="loginAuthenticationFailureHandler"
+  		class="com.jzb.fgang.auth.DefaultAuthenticationFailureHandler" />
+  	
+    <!-- 未登录的切入点 -->  
+  	<beans:bean id="authenticationProcessingFilterEntryPoint" class="org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint">  
+    	<beans:property name="loginFormUrl" value="/auth/login"></beans:property>  
+  	</beans:bean>
+  
+</beans:beans>
