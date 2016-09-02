@@ -8,7 +8,7 @@
   <name>family Maven Webapp</name>
   <url>http://maven.apache.org</url>
   <build>
-		<finalName>pamm-pc</finalName>
+		<finalName>familyBang</finalName>
 		<plugins>
 			<plugin> 
 	            <groupId>org.apache.maven.plugins</groupId> 
