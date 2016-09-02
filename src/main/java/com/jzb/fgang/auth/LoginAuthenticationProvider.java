@@ -21,6 +21,9 @@ public class LoginAuthenticationProvider extends AbstractUserDetailsAuthenticati
 	
 	private DefaultUserDetailsService userDetailService;
 	
+	/**
+	 * 检索用户
+	 */
 	@Override
 	protected UserDetails retrieveUser(String username,
 			UsernamePasswordAuthenticationToken authentication)
