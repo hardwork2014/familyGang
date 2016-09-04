@@ -21,7 +21,7 @@
 	</bean>
 
 	<!-- 用于持有applicationProperties,将properties转变为静态方法使用,PropertiesHolder.getProperty("somekey")--> 
-	<bean class="com.jzb.fgang.utils.PropertiesUtils" lazy-init="false">
+	<bean class="com.jzb.family.utils.PropertiesUtils" lazy-init="false">
 		<property name="properties" ref="applicationProperties" />
 	</bean>
 
@@ -62,14 +62,14 @@
 
 	<aop:config proxy-target-class="true">
 		<aop:pointcut id="serviceOperation"
-			expression="execution(* com.jzb.fgang.*.*Service+.*(..))" />
+			expression="execution(* com.jzb.family.*.*Service+.*(..))" />
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="serviceOperation" />
 	</aop:config>
 	
 	<!-- 配置MyBatis映射文件 -->
      <bean name="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
-         <property name="typeAliasesPackage" value="com.jzb.fgang.model"/>
+         <property name="typeAliasesPackage" value="com.jzb.family.domain"/>
         <property name="mapperLocations" value="classpath*:mybatis/mappers/*.xml"/>
         <property name="configurationProperties">
             <props>
@@ -79,7 +79,7 @@
         </property>
         <property name="plugins">
         	<list>
-        		<bean class="com.jzb.fgang.utils.PagingPlugin">
+        		<bean class="com.jzb.family.utils.PagingPlugin">
         			<property name="dialect" value="mysql"></property>
         		</bean>
         	</list>
@@ -88,8 +88,8 @@
 
 	<!-- 扫描com.paic.clearing.mapper下的所有接口，然后创建各自接口的动态代理类 -->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="com.jzb.fgang.mapper"/>
-        <property name="annotationClass" value="org.mybatis.spring.annotation.MapperScan"/>
+        <property name="basePackage" value="com.jzb.family.mapper"/>
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
     </bean>
 
 	<bean name="dataSource" class="com.alibaba.druid.pool.DruidDataSource"

@@ -18,7 +18,7 @@
 	<mvc:annotation-driven />
 	
 	<!-- 只搜索@Controller 标注的类 不搜索其他标注的类 -->
-	<context:component-scan base-package="com.jzb.fgang" use-default-filters="false">
+	<context:component-scan base-package="com.jzb.family" use-default-filters="false">
 		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" />
 	</context:component-scan>
 	

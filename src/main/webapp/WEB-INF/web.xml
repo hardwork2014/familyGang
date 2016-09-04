@@ -28,7 +28,7 @@
   
   <servlet>
     <servlet-name>InitServlet</servlet-name>
-    <servlet-class>com.jzb.fgang.web.filter.InitServlet</servlet-class>
+    <servlet-class>com.jzb.family.web.filter.InitServlet</servlet-class>
     <load-on-startup>0</load-on-startup>
   </servlet>
   <servlet>
@@ -52,7 +52,7 @@
   
   <servlet>
     <servlet-name>VerifyCodeServlet</servlet-name>
-    <servlet-class>com.jzb.fgang.web.filter.VerifyCodeServlet</servlet-class>
+    <servlet-class>com.jzb.family.web.filter.VerifyCodeServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>VerifyCodeServlet</servlet-name>
@@ -83,9 +83,6 @@
   <listener>
 	<listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>
   </listener> 
-  <listener>
-	<listener-class>com.jzb.fgang.auth.UserInfoThreadLocalClearListener</listener-class>
-  </listener>
 
  <!-- Error Page定义-->
   <error-page>
