@@ -1,0 +1,146 @@
+html,body{height:100%;}
+body{min-width:1200px;background-color: #fff;}
+#loginWrap{
+	margin: 0 auto;
+	width: 100%;
+	height: 100%;
+	background: #fff url(../image/loginBG.jpg) repeat-x 0 0;
+	position: relative;
+}
+#loginFormWrap{
+	position: absolute;
+	top:81px;
+	left:50%;
+	margin-left:-358px;
+	width: 716px;
+	height: 519px;
+	background: url(../image/loginForm.jpg) no-repeat 0 0;
+}
+#loginForm{
+	padding-top:190px;
+	padding-left:174px;
+}
+.loginLine{
+	margin-top: 8px;
+}
+.loginLine label{
+	float: left;
+	width: 128px;
+	padding-right:16px;
+	text-align: right;
+	color: #5a5c5b;
+	line-height: 22px;
+}
+.loginInput{
+	float: left;
+	width: 155px;
+	padding:5px 5px 5px 27px;
+	border:1px #c8d2dc solid;
+	border-radius: 5px;
+	outline: 0;
+	background-repeat: no-repeat;
+	background-position: 6px center;
+}
+/*
+.loginName{
+	background-image:url(../image/loginUser.jpg);
+}
+.loginPwd{
+	background-image:url(../image/loginPwd.jpg);
+}
+*/
+.loginInput:focus{
+	border:2px #3b78a4 solid;
+	padding:4px 4px 4px 26px;
+	background-position: 5px center;
+}
+.loginCode{
+	width:88px;
+	padding-left:5px;
+	padding-right:5px;
+	margin-right: 5px;
+}
+.loginCode:focus{
+	padding:4px 4px 4px 4px;
+}
+.loginBtn{
+	margin-left:145px;
+	width: 98px;
+	height: 29px;
+	line-height: 29px;
+	text-align: center;
+	border:0 none;
+	color:#fff;
+	font-weight: bold;
+	background: url(../image/loginBtn.jpg) no-repeat 0 0;
+}
+#loginLogo{
+	position: absolute;
+	top:25px;
+	left:27px;
+	width: 119px;
+	height: 44px;
+	background: url(../image/loginLogo.jpg) no-repeat 0 0;
+}
+#loginAd{
+	position: absolute;
+	left:590px;
+	top:53px;
+	width: 290px;
+	height: 55px;
+	background: url(../image/loginADText.jpg) no-repeat 0 0;
+}
+
+.hand {
+	cursor : pointer;
+}
+
+.footer {
+	width: 100%;
+	height: 200px;
+	position: absolute;
+	top:550px;
+}
+.copyright {
+  border-top: 1px solid #E1DFDE;
+  color: #8B8B8B;
+  line-height: 30px;
+  padding-top: 5px;
+  text-align: center;
+  width: 980px;
+  margin: 0 auto;
+  font-family: Arial, Helvetica, sans-serif, SimSun;
+}
+
+.cp_txt {
+  text-align: center;
+}
+
+#errorMessage {
+	color: red;
+	height: 25px;
+	display: none;
+	width: 400px;
+	text-align: center;
+}
+.icon_username,.icon_pwd{
+	position: absolute;
+	left: 153px;
+	top: 7px;
+	top: 5px \9;
+	background-repeat: no-repeat;
+	background-position: 0 0;
+}
+.icon_username {
+	background-image:url(../image/loginUser.jpg);
+	display:block;
+	width:16px;
+	height:16px;
+}
+
+.icon_pwd {
+	background-image:url(../image/loginPwd.jpg);
+	display:block;
+	width:16px;
+	height:16px;
+}

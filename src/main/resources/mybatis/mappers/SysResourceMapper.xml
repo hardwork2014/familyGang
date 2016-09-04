@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jzb.family.mapper.SysResourceMapper" >
+  <resultMap id="BaseResultMap" type="com.jzb.family.domain.SysResource" >
+    <id column="ID_RESOURCE" property="idResource" jdbcType="INTEGER" />
+    <result column="RESOURCE_NAME" property="resourceName" jdbcType="VARCHAR" />
+    <result column="RESOURCE_URL" property="resourceUrl" jdbcType="VARCHAR" />
+    <result column="RESOURCE_TYPE" property="resourceType" jdbcType="VARCHAR" />
+    <result column="RESOURCE_CODE" property="resourceCode" jdbcType="VARCHAR" />
+    <result column="PARENT_RESOURCE_ID" property="parentResourceId" jdbcType="INTEGER" />
+    <result column="WEIGHT" property="weight" jdbcType="INTEGER" />
+    <result column="IS_DELETE" property="isDelete" jdbcType="VARCHAR" />
+    <result column="IS_SYSTEM_CONF_MENU" property="isSystemConfMenu" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <sql id="Base_Column_List" >
+    ID_RESOURCE, RESOURCE_NAME, RESOURCE_URL, RESOURCE_TYPE, RESOURCE_CODE, PARENT_RESOURCE_ID, 
+    WEIGHT, IS_DELETE, IS_SYSTEM_CONF_MENU
+  </sql>
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_sys_resource
+    where ID_RESOURCE = #{idResource,jdbcType=INTEGER}
+  </select>
+  
+  <select id="selectByRoleId" resultMap="BaseResultMap" parameterType="java.lang.String">
+  	select <include refid="Base_Column_List" /> 
+  	from t_sys_resource a
+  	inner join t_sys_resource_role_rel b on a.ID_RESOURCE = b.RESOURCE_ID  and b.IS_DELETE = 'N'
+  	inner join t_sys_user_role_rel c on c.ID_ROLE = b.ID_ROLE and c.IS_DELETE = 'N'
+  	inner join t_sys_user d on d.ID_USER = c.ID_USER and d.VALID_FLAG = 1
+  	where d.ID_USER = #{idUser,jdbcType=VARCHAR} and a.IS_DELETE = 'N'
+  	order by a.WEIGHT
+  </select>
+  
+  <select id="selectAll" resultMap="BaseResultMap">
+  	select <include refid="Base_Column_List" /> 
+  	from t_sys_resource where IS_DELETE = 'N'
+  </select>
+  
+  <insert id="insertSelective" parameterType="com.jzb.family.domain.SysResource" >
+    insert into t_sys_resource
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="idResource != null" >
+        ID_RESOURCE,
+      </if>
+      <if test="resourceName != null" >
+        RESOURCE_NAME,
+      </if>
+      <if test="resourceUrl != null" >
+        RESOURCE_URL,
+      </if>
+      <if test="resourceType != null" >
+        RESOURCE_TYPE,
+      </if>
+      <if test="resourceCode != null" >
+        RESOURCE_CODE,
+      </if>
+      <if test="parentResourceId != null" >
+        PARENT_RESOURCE_ID,
+      </if>
+      <if test="weight != null" >
+        WEIGHT,
+      </if>
+      <if test="isDelete != null" >
+        IS_DELETE,
+      </if>
+      <if test="isSystemConfMenu != null" >
+        IS_SYSTEM_CONF_MENU,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="idResource != null" >
+        #{idResource,jdbcType=INTEGER},
+      </if>
+      <if test="resourceName != null" >
+        #{resourceName,jdbcType=VARCHAR},
+      </if>
+      <if test="resourceUrl != null" >
+        #{resourceUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="resourceType != null" >
+        #{resourceType,jdbcType=VARCHAR},
+      </if>
+      <if test="resourceCode != null" >
+        #{resourceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="parentResourceId != null" >
+        #{parentResourceId,jdbcType=INTEGER},
+      </if>
+      <if test="weight != null" >
+        #{weight,jdbcType=INTEGER},
+      </if>
+      <if test="isDelete != null" >
+        #{isDelete,jdbcType=VARCHAR},
+      </if>
+      <if test="isSystemConfMenu != null" >
+        #{isSystemConfMenu,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.jzb.family.domain.SysResource" >
+    update t_sys_resource
+    <set >
+      <if test="resourceName != null" >
+        RESOURCE_NAME = #{resourceName,jdbcType=VARCHAR},
+      </if>
+      <if test="resourceUrl != null" >
+        RESOURCE_URL = #{resourceUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="resourceType != null" >
+        RESOURCE_TYPE = #{resourceType,jdbcType=VARCHAR},
+      </if>
+      <if test="resourceCode != null" >
+        RESOURCE_CODE = #{resourceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="parentResourceId != null" >
+        PARENT_RESOURCE_ID = #{parentResourceId,jdbcType=INTEGER},
+      </if>
+      <if test="weight != null" >
+        WEIGHT = #{weight,jdbcType=INTEGER},
+      </if>
+      <if test="isDelete != null" >
+        IS_DELETE = #{isDelete,jdbcType=VARCHAR},
+      </if>
+      <if test="isSystemConfMenu != null" >
+        IS_SYSTEM_CONF_MENU = #{isSystemConfMenu,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID_RESOURCE = #{idResource,jdbcType=INTEGER}
+  </update>
+
+</mapper>

@@ -28,11 +28,13 @@
         </session-management>
         <!-- 自定义UsernamePasswordAuthenticationFilter，校验用户输入和验证码 -->
 	    <custom-filter ref="loginFilter" position="FORM_LOGIN_FILTER" />
+	    <!--自定义filter，用户的角色和角色对应权限的映射  -->
+	    <custom-filter ref="myFilter" before="FILTER_SECURITY_INTERCEPTOR" />
     </http>
     
     <!-- 登录验证器 -->  
   	<beans:bean id="loginFilter"  
-    	class="com.jzb.fgang.auth.MyUsernamePasswordAuthenticationFilter">  
+    	class="com.jzb.family.auth.MyUsernamePasswordAuthenticationFilter">  
     	<beans:property name="filterProcessesUrl" value="/j_spring_security_check"></beans:property>
         <!-- 验证成功后的处理  -->   
     	<beans:property name="authenticationSuccessHandler" ref="loginAuthenticationSuccessHandler"></beans:property>  
@@ -42,19 +44,41 @@
     	<beans:property name="authenticationManager" ref="loginAuthenticationManage"></beans:property>
     	
     	<beans:property name="useCaptcha" value="true"></beans:property>
-  	</beans:bean>  
+  	</beans:bean>
+  	
+  	<beans:bean id="myFilter"
+		class="org.springframework.security.web.access.intercept.FilterSecurityInterceptor">
+		<!-- 全量的权限和角色的对应关系 -->
+		<beans:property name="securityMetadataSource" ref="defaultSecurityMetadataSource" />
+		<!-- 用户拥有的权限 -->
+		<beans:property name="authenticationManager" ref="loginAuthenticationManage" />
+		<!-- 用户是否拥有所请求资源的权限 -->
+		<beans:property name="accessDecisionManager" ref="defaultAccessDecisionManager" />
+	</beans:bean>  
+	
+	<!-- 资源源数据定义，即定义某一资源可以被哪些角色访问 -->
+	<beans:bean id="defaultSecurityMetadataSource" 
+		class="com.jzb.family.auth.DefaultSecurityMetadataSource" />
     
+    <authentication-manager alias="loginAuthenticationManage">
+  		<authentication-provider ref="loginAuthenticationProvider" />
+  	</authentication-manager> 
+  	
+  	 <!-- 访问决策器，决定某个用户具有的角色，是否有足够的权限去访问某个资源 -->
+	<beans:bean id="defaultAccessDecisionManager" 
+		class="com.jzb.family.auth.DefaultAccessDecisionManager" />
+		
   	<authentication-manager alias="loginAuthenticationManage">
   		<authentication-provider ref="loginAuthenticationProvider" />
   	</authentication-manager> 
   	
-  	<beans:bean id="loginAuthenticationProvider" class="com.jzb.fgang.auth.LoginAuthenticationProvider">
+  	<beans:bean id="loginAuthenticationProvider" class="com.jzb.family.auth.LoginAuthenticationProvider">
   		<beans:property name="userDetailService" ref="dbUserDetailService" />
   		<beans:property name="passwordEncoder" ref="passwordEncoder" />
   	</beans:bean>
   	
   	<beans:bean id="dbUserDetailService"
-		class="com.jzb.fgang.service.DefaultUserDetailsService" />
+		class="com.jzb.family.service.DefaultUserDetailsService" />
 		
 	<!-- 存储的密码的加密方式 -->
 	<beans:bean id="passwordEncoder"
@@ -62,11 +86,11 @@
 		
   	<!-- 登陆成功处理 -->
   	<beans:bean id="loginAuthenticationSuccessHandler" 
-  		class="com.jzb.fgang.auth.DefaultAuthenticationSuccessHandler" />
+  		class="com.jzb.family.auth.DefaultAuthenticationSuccessHandler" />
   		
   	<!-- 登陆失败处理 -->
   	<beans:bean id="loginAuthenticationFailureHandler"
-  		class="com.jzb.fgang.auth.DefaultAuthenticationFailureHandler" />
+  		class="com.jzb.family.auth.DefaultAuthenticationFailureHandler" />
   	
     <!-- 未登录的切入点 -->  
   	<beans:bean id="authenticationProcessingFilterEntryPoint" class="org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint">  

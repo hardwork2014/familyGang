@@ -1,0 +1,409 @@
+@charset "utf-8";
+
+/* layout */
+body{
+	background-color: #f1f1f1;
+}
+
+/* 表单 */
+.input{
+	color:#232323;
+	padding:4px 7px 5px;
+	border-top:1px #bfbfbf solid;
+	border-left:1px #bfbfbf solid;
+	border-right:1px #e0e0e0 solid;
+	border-bottom:1px #e0e0e0 solid;
+	border-radius: 3px;
+}
+.select{
+	color:#232323;
+	height: 24px;
+	line-height: 24px;
+	font-family : Trebuchet MS;
+	border-top:1px #bfbfbf solid;
+	border-left:1px #bfbfbf solid;
+	border-right:1px #e0e0e0 solid;
+	border-bottom:1px #e0e0e0 solid;
+	border-radius: 3px;
+}
+.btn-list{
+	padding:1px;
+	background:#fff;
+	border:1px #c8c8c8 solid;
+	cursor: pointer;
+}
+.btnInner-list{
+	width: 58px;
+	height: 22px;
+	line-height: 22px;
+	text-align: center;
+	background:#ebebeb;
+	filter: progid:DXImageTransform.Microsoft.Gradient(gradientType=0,startColorStr=#fffff,endColorStr=#ebebeb); /*IE 6 7 8 */
+	background: -ms-linear-gradient(top,#fffff,#ebebeb);        /* IE 10 */
+	background: -moz-linear-gradient(top,#fffff,#ebebeb);/*火狐*/ 
+	background: -webkit-gradient(linear, 0% 0%, 0% 100%,from(#fffff), to(#ebebeb));/*谷歌*/ 
+	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#fffff), to(#ebebeb));      /* Safari 4-5, Chrome 1-9*/
+	background: -webkit-linear-gradient(top, #fffff, #ebebeb);   /*Safari5.1 Chrome 10+*/
+	background: -o-linear-gradient(top, #fffff, #ebebeb);  /*Opera 11.10+*/
+	background: -webkit-linear-gradient(top, #fefefe, #edefec);
+	position: relative;*/
+}
+.btn-form{
+	width: 126px;
+	height: 27px;
+	line-height: 26px;
+	color:#fff;
+	text-align: center;
+	background:#2E6EAB;
+	border:1px #237ec7 solid;
+	border-radius: 3px;
+}
+
+/* 列表上面的搜索 */
+.listSearch-title{
+	height: 33px;
+	line-height: 30px;
+	background: url(../image/listSearch-title-bg.jpg) repeat-x 0 bottom;
+}
+.listSearch-title h4{
+	font-size:14px;
+	padding-left:30px;
+	background:url(../image/listSearch-title.jpg) no-repeat 0 center;
+}
+.pen-title h5{
+	font-size:12px;
+	padding-left:30px;
+	background:url(../image/pen.png) no-repeat 0 center;
+}
+.pen-title .addTime {
+	padding-left: 17px;
+  	background: url(../image/reply-time.jpg) no-repeat 0 center;
+  	color: rgb(134,134,134);
+  	font-size: 12px;
+  	position: absolute;
+  	right: 20px;
+  	top: 0px;
+}
+.listSearch-title .priority {
+	position:absolute;
+	width:48px;
+	height:57px;
+	top: 31px;
+  	right: 18px;
+}
+
+.listSearch-title .low {
+	background: url(../image/priority_low.png) no-repeat 0 center;
+}
+
+.listSearch-title .normal {
+	background: url(../image/priority_normal.png) no-repeat 0 center;
+}
+
+.listSearch-title .urgent {
+	background: url(../image/priority_urgent.png) no-repeat 0 center;
+}
+
+.listSearch-title .veryUrgent {
+	background: url(../image/priority_very_urgent.png) no-repeat 0 center;
+}
+
+.listSearch-form{
+	padding-left:15px;
+	margin-top: 16px;
+}
+.listSearch-line{
+	margin-bottom: 10px;
+}
+.inputWrap{
+	margin-right: 37px;
+	color:#000;
+}
+
+/* 渐变 */
+.gradient{
+	filter: progid:DXImageTransform.Microsoft.Gradient(gradientType=0,startColorStr=#fefefe,endColorStr=#ebebeb); /*IE 6 7 8*/ 
+	background: -ms-linear-gradient(top,#fefefe,#ebebeb);        /* IE 10 */
+	background: -moz-linear-gradient(top,#fefefe,#ebebeb);/*火狐*/ 
+	background: -webkit-gradient(linear, 0% 0%, 0% 100%,from(#fefefe), to(#ebebeb));/*谷歌*/ 
+	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#fefefe), to(#ebebeb));      /* Safari 4-5, Chrome 1-9*/
+	background: -webkit-linear-gradient(top, #fefefe, #ebebeb);   /*Safari5.1 Chrome 10+*/
+	background: -o-linear-gradient(top, #fefefe, #ebebeb);  /*Opera 11.10+*/
+	background: -webkit-linear-gradient(top, #fefefe, #edefec);
+	background: -webkit-linear-gradient(top, #fefefe, #edefec);
+}
+
+/* 列表 */
+.listOption{
+	border:1px #d7d7d7 solid;
+	border-bottom: none;
+}
+.listOption ul{
+	height: 30px;
+	padding-left: 9px;
+	border:1px #fff solid;
+}
+.listOption ul li{
+	float: left;
+	margin-left: 9px;
+	line-height: 30px;
+}
+.listOption-add{
+	padding-left: 22px;
+	background:url(../image/add.jpg) no-repeat 0 center;
+}
+.listOption-edit{
+	padding-left: 22px;
+	background:url(../image/edit.jpg) no-repeat 0 center;
+}
+.listWrap{
+	border:1px #d7d7d7 solid;
+	border-bottom: none;
+}
+.listWrap td{
+	border-top:1px #d7d7d7 solid;
+	border-bottom:1px #d7d7d7 solid;
+	background: url(../image/td-top.jpg) repeat-x 0 0;
+}
+.listWrap-table{
+	width: 100%;
+	text-align: center;
+}
+.listWrap-table tr{
+	border-top:1px #fff solid;
+}
+.listWrap-table th,.listWrap-table td{
+	height: 29px;
+}
+.listWrap-table tbody tr:nth-child(odd){background: #fff;}
+.listWrap-table a{
+	color:#4783bf;
+	text-decoration: underline;
+}
+
+/* 提交表单 */
+.form-table{width:100%;}
+.form-table td{
+	padding:12px 0;
+}
+.form-title{
+	text-align: right;
+	font-size: 12px;
+	/* font-weight: bold; */
+	vertical-align: top;
+	line-height: 24px;
+	letter-spacing: 3px;
+}
+.form-input{
+	text-align: left;
+}
+.form-table .input{
+	padding-left: 0;
+	padding-right: 0;
+	text-indent: 7px;
+}
+.form-table .textarea{width:97%;}
+
+/* 问题图片 */
+.problemPicList li{
+	float: left;
+	margin-right: 40px;
+}
+.problemPicText{
+	margin-top: 16px;
+	color: #9d9d9d;
+	font-weight: bold;
+	letter-spacing: 2px;
+}
+
+.edt-item{
+	padding-top: 20px;
+	padding-left: 30px;
+	padding-bottom: 15px;
+	border-bottom: 1px #ccc dotted;
+	font-size: 14px;
+}
+
+.replyTop{
+	height: 40px;
+	line-height: 40px;
+	border-bottom: 1px #ccc solid;
+}
+.replyTop h4{
+	float: left;
+	font-size:12px;
+  	padding-left: 30px;
+  	background: url(../image/history.png) no-repeat 0 center;
+}
+.replyTop button{
+	width:80px;
+}
+.reply-item{
+	padding-top: 25px;
+	padding-left: 30px;
+	padding-bottom: 30px;
+	border-bottom: 1px #ccc dotted;
+	font-size: 12px;
+}
+
+.reply-head{
+	float: left;
+	margin-left: 14px;
+	width: 46px;
+	height: 46px;
+	padding: 1px;
+	border: 1px #ddd solid;
+	position: relative;
+	top: -5px;
+}
+.reply-head-role{
+	position: absolute;
+  	width: 60px;
+  	top: 50px;
+  	left: 1px;
+  	left: 4px \9;
+  	font-size: 10px;
+  	color: #868686;
+}
+.reply-info{
+	float: left;
+	width: 830px;
+	margin-left: 47px;
+}
+.reply-name{
+	color:rgb(53,117,191);
+	font-weight: bold;
+	font-size: 12px;
+}
+.reply-addTime{
+	padding-left: 17px;
+	background: url(../image/reply-time.jpg) no-repeat 0 center;
+}
+.reply-company,.reply-addTime{
+	color:rgb(134,134,134);
+	font-size:12px;
+}
+.reply-content{
+	margin-top: 10px;
+}
+
+.page{
+	padding: 0 20px;letter-spacing: 3px;margin-top: 5px;
+}
+.page .pageNum{
+	border:1px rgb(164,164,164) solid;
+	background:rgb(252,252,252);
+	cursor:pointer;
+	display: inline-block;
+	min-width:16px;
+	height:16px;
+	line-height:16px;
+	text-align: center;
+	letter-spacing: 0;
+}
+.page .pageOn{
+	background:rgb(65,126,180);
+	border:1px rgb(36,89,139) solid;
+	color:#fff;
+	cursor:default;
+}
+.page .page p{
+	*padding:5px;
+}
+.page .pageText{
+	cursor:pointer;
+	color:#2767A4;
+	letter-spacing: 0px;
+	width: 36px; 
+	display: inline-block;
+}
+.page .pageDisable{
+	color:#000;
+	cursor:default;
+}
+.star {
+	color: red;
+}
+
+.inputS{
+	height:20px;
+	line-height:24px;
+	text-indent:10px;
+	border:1px solid #ccc;
+	border-radius:3px;
+	background:#fff;
+}
+.mr10{
+	margin-right:10px;
+}
+.dealToolBar {
+	position: relative;
+}
+.opt_panel{
+	width:150px;
+	position: absolute;
+	text-align: left;
+	right: 0px;
+	bottom: 38px;
+  	background: #fdfdfd;
+  	border: 1px #346590 solid;
+  	border-radius: 5px;
+  	-webkit-box-shadow:0 0 10px #949494;  
+	-moz-box-shadow:0 0 10px #949494;  
+	box-shadow:0 0 10px #949494;
+	max-height:180px; 
+	display: none;
+}
+.opt_panel .opt_panel_ul{
+	max-height:180px; 
+	overflow: auto;
+}
+
+.opt_panel ul li {
+	line-height: 30px;
+	text-indent: 12px;
+  	cursor: pointer;
+}
+
+.opt_panel ul li:hover{
+	background:#2E6EAB;
+	color:#fff;
+	font-weight: bold;
+	border-radius: 5px;
+}
+.black{color:#000}
+.red{color:#dd0000}
+.orange{color:#ff9933}
+.yellow{color:#ff3333}
+.green{color:#00cc00}
+
+.replyList .edt_tool_bar {
+	width:98%;
+	padding-top:10px;
+	padding-left:10px;
+	font-size:12px;
+}
+
+.date-icon {
+	background-image: url(../image/datePicker.gif);
+	background-repeat: no-repeat;
+	background-position: right center;
+}
+
+/*隐藏超长的内容，以省略号...代替*/
+.ellipsis{overflow:hidden;white-space:nowrap;text-overflow:ellipsis;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

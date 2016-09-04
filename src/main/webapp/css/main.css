@@ -1,0 +1,349 @@
+@charset "utf-8";
+
+/* 测试样式，待删除 */
+.redBG{outline: 1px red solid;}
+.greenBG{outline: 1px green solid;}
+.blueBG{outline: 1px blue solid;}
+.yellowBG{outline: 1px yellow solid;}
+
+/* layout */
+body{
+	min-width: 1200px;
+	background-color: #f1f1f1;
+	background-repeat: repeat-y;
+	background-position: 0 0;
+}
+#top{
+	margin:0 auto;
+	width:100%;
+	height:75px;
+	border-bottom: 3px #2d77be solid;
+	background: #f6f6f6;
+	background: url(../image/header_bg.jpg) repeat-x 0 0;
+	position:relative;
+	z-index: 2;
+}
+#wrap{margin:0 auto;width:100%;}
+#sider{
+	float:left;
+	width:221px;
+}
+#siderInner{
+	padding-bottom: 30px;
+	padding-right:11px;
+}
+.siderWelcome{
+	width: 100%;
+	height: 38px;
+	line-height: 38px;
+	background: url(../image/hello_bg.jpg) repeat-x 0 0;
+	color:#fff;
+}
+.siderWelcomeInner{
+	margin-left:20px;
+	padding-left: 32px;
+	background: url(../image/head.jpg) no-repeat 0 center;
+}
+#mainWrap{margin-left:210px;padding:0 0 0 8px;padding-top:5px;background: url(../image/tabs_bg.jpg) repeat-x 0 0;}
+
+/* top */
+.image{background-image: url(../image/siderBG.jpg);}
+#logoArea{
+	float: left;
+	margin-left: 45px;
+	margin-top: 16px;
+}
+.logoPic{
+	float: left;
+	padding-top: 4px;
+}
+.logoText-ch{
+	font-weight: bold;
+	font-size: 22px;
+	font-family: '微软雅黑';
+	letter-spacing: 10px;
+	color: #333;
+	line-height: 28px;
+}
+.logoText-en{
+	font-size: 16px;
+	font-weight: bold;
+	color: #333;
+	line-height: 20px;
+	word-spacing:-3px;
+}
+.top-slog {
+	height: 50px;
+	width: 240px;
+}
+.top-slog a{color:#2365A1; margin-right: 3px;}
+.top-slog a:hover{color:#EA5504;}
+.top-slog p {
+	background: url(../image/con_toobar.jpg) repeat-x 0 0;
+	width:198px;
+	height:26px;
+	padding-top:2px;
+}
+.collection{
+	padding-left: 20px;
+	margin-left: 26px;
+}
+.logout{
+	padding-left: 20px;
+}
+nav{
+	float: left;
+	height: 27px;
+	/*margin-top: 59px;
+	margin-left: 18px;*/
+	position: absolute;
+	bottom:0;
+	left:210px;
+}
+nav li{
+	float: left;
+	margin-right: 10px;
+}
+.navCenter,.navRight,.navLeft{
+	background-image:url(../image/nav.jpg);
+}
+.navCenter{
+	background-position: 0 -135px;
+	background-repeat: repeat-x;
+}
+.navRight{
+	background-position: right -108px;
+	background-repeat: no-repeat;
+}
+.navLeft{
+	height: 27px;
+	line-height: 29px;
+	width:125px;
+	text-align: center;
+	font-size: 12px;
+	font-weight: bold;
+	color:#fff;
+	background-position: 0 -81px;
+	background-repeat: no-repeat;
+	overflow: hidden;
+	letter-spacing: 3px;
+	cursor: pointer;
+}
+.navOn .navCenter{background-position: 0 -54px;}
+.navOn .navRight{background-position: right -27px;}
+.navOn .navLeft{background-position: 0 0;}
+#top-searchWrap{
+	position: absolute;
+	bottom: 0;
+	right:0;
+	width: 262px;
+	height: 26px;
+	padding-right: 8px;
+	background: url(../image/top-search.jpg) repeat-x 0 0;
+}
+.top-searchForm{margin-top:3px;}
+.top-searchForm,.top-searchRight,.top-searchLeft{
+	height: 23px;
+	line-height: 23px;
+}
+.top-searchForm{background: url(../image/top-searchCenter.jpg) repeat-x 0 0;}
+.top-searchRight{background: url(../image/top-searchRight.jpg) no-repeat right 0;}
+.top-searchLeft{background: url(../image/top-searchLeft.jpg) no-repeat 0 0;}
+.top-searchKefu{
+	position: absolute;
+	bottom: -1px;
+	left:-85px;
+	width: 85px;
+	height: 86px;
+	background: url(../image/top-searchKeju.png) no-repeat 0 0;
+}
+.top-searchSelect{
+	width: 90px;
+	letter-spacing: 2px;
+	color: #144677;
+	float: left;
+}
+.top-searchType{
+	position: relative;
+	top:5px;
+	line-height: 15px;
+	padding-left: 15px;
+	border-right: 1px #d6d2d1 solid;
+}
+.top-searchTypeText{
+	display: block;
+	width: 64px;
+	height: 15px;
+	margin-right:5px;
+	padding-right:1px;
+	overflow: hidden;
+	background: url(../image/top-searchArrowDown.jpg) no-repeat right 6px;
+}
+.top-searchTypeList,.top-searchInputList{
+	position: absolute;
+	top:22px;
+	background: #fff;
+	border:1px #346697 solid;
+	border-top:none;
+}
+.top-searchTypeList{width: 82px;left:8px;}
+.top-searchTypeList li,.top-searchInputList li{
+	text-indent: 12px;
+	cursor: pointer;
+}
+.top-searchTypeList li:hover,.top-searchInputList li:hover{
+	background:#4086c2;
+	color:#fff;
+	font-weight: bold;
+}
+.top-searchInput{
+	width: 130px;
+	padding:0 5px;
+	background: none;
+	border:0 none;
+	outline: 0;
+}
+.top-searchBtn{
+	margin-top: 6px;
+	margin-right: 11px;
+	width: 13px;
+	height: 12px;
+	background: url(../image/top-searchBtn.jpg) no-repeat 0 0;
+}
+.top-searchInputList{
+	width: 146px;
+	left:0;
+}
+
+/* sider */
+.ucpWrap{
+	margin:10px auto 0;
+	width:90%;
+	height: 200px;
+}
+#siderMenu{
+	/*margin:10px auto 0;*/
+	width: 100%;
+	color:#fff;
+}
+.menuItem{
+	float: left;
+	width: 100%;
+}
+.menuLev1,.menuLev2Wrap{
+	width: 100%;
+	line-height: 30px;
+}
+.menuLev1{
+	height: 30px;
+}
+.menuLev1{
+	cursor: pointer;
+	font-weight: bold;
+	background: url(../image/siderLev1.jpg) repeat-x 0 0;
+}
+.menuLev2Wrap{
+	display: none;
+}
+.menuLev2WrapOn{display: block;}
+.menuLev1Inner{
+	text-indent: 42px;
+	background: url(../image/siderLev1-ico.jpg) no-repeat 20px center;
+}
+.menuLev2{
+	float: left;
+	width: 100%;
+	height: 31px;
+	line-height: 30px;
+	cursor: pointer;
+	border-bottom: 1px #fff dotted;
+}
+.menuLev2Inner{
+	text-indent: 54px;
+	background: url(../image/siderLev2-ico.jpg) no-repeat 39px center;
+}
+#siderBtn{
+	position: absolute;
+	left:211px;
+	top:50%;
+	width:8px;
+	height: 41px;
+	cursor: pointer;
+	background: url(../image/siderFold2.jpg) no-repeat 0 0;
+}
+#siderBtn.siderBtnOn{
+	left:0;
+}
+
+/* tab */
+#tabBar{
+	margin:0 auto;
+	height: 25px;
+	line-height: 25px;
+	padding-left: 18px;
+	border-bottom: 1px #69717c solid;
+}
+.tabItem{
+	float: left;
+	cursor: pointer;
+}
+.tabCenter,.tabRight,.tabLeft{
+	background-image:url(../image/tab.png);
+}
+.tabCenter{
+	background-position: 0 -9px;
+	background-repeat: repeat-x;
+}
+.tabRight{
+	background-position: right -61px;
+	background-repeat: no-repeat;
+}
+.tabLeft{
+	width: 145px;
+	height: 26px;
+	line-height: 25px;
+	background-position: 0 -35px;
+	background-repeat: no-repeat;
+}
+.tabOn .tabCenter{background-position: 0 -87px;}
+.tabOn .tabRight{background-position: right -139px;}
+.tabOn .tabLeft{background-position: 0 -113px;}
+.tab-ico,.tab-text,.tab-close{
+	display: inline-block;
+}
+.tab-close{
+	float: right;
+	margin-right: 8px;
+	font-family: verdana;
+}
+.tab-ico{
+	width:12px;
+	height: 15px;
+	margin-left: 7px;
+	vertical-align: middle;
+	background: url(../image/tab-ico.jpg) no-repeat 0 0;
+}
+
+.webContain{padding:10px 8px 0;}
+
+iframe{background: #f1f1f1;}
+
+/*分页*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
