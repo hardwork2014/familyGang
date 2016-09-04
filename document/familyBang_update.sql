@@ -1,4 +1,4 @@
-SELECT * FROM mcht_user WHERE user_name='admin'; 
+SELECT * FROM mcht_user WHERE user_name='admin';   
 
 CREATE TABLE `t_sys_user` (
   `ID_USER` VARCHAR(32) NOT NULL COMMENT '用户id',
